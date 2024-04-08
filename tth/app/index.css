@@ -1,0 +1,51 @@
+.loginpages {
+    text-align: center;
+    margin-top: 150px;
+  }
+  
+  .loginpages input[type="email"],
+  .loginpages input[type="name"],
+  .loginpages input[type="password"],
+  .loginpages button {
+    display: block;
+    width: 300px;
+    padding: 10px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #007bff;
+  }
+  
+  .loginpages input[type="email"],
+  .loginpages input[type="name"],
+  .loginpages input[type="password"] {
+    outline: none;
+  }
+  
+  .loginpages button {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .loginpages button:hover {
+    background-color: #0056b3;
+  }
+  
+  .profiles {
+    text-align: center;
+    margin-top: 150px;
+  }
+  
+  .profiles img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+  }
+  
+  .profiles p {
+    margin-top: 10px; /* Adjust as needed */
+  }
+  
