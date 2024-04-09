@@ -28,7 +28,7 @@ function Profile() {
         // ...
       }
     });
-  });
+  },[]);
 
   return (
     <div className="profiles">

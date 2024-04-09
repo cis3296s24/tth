@@ -39,6 +39,7 @@ export default function Home() {
           ...doc.data(),
         } as Items));
         setUsers(data);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
