@@ -24,7 +24,7 @@ function DeleteButton({ projectID, currentUserID }: { projectID: Items; currentU
       await deleteDoc(docRef);
   
       console.log('Document successfully deleted!');
-      router.push('/fees');
+      router.push('/feed');
        }
 
         else{
@@ -41,7 +41,7 @@ function DeleteButton({ projectID, currentUserID }: { projectID: Items; currentU
     <>
     {projectID.user_id === currentUserID &&
     <button  onClick={deleteItemes} 
-    className="bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-2 rounded">Delete</button>
+    className="bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-2 rounded">Delete Post</button>
     }
    
     </>
