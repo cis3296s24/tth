@@ -60,8 +60,6 @@ export default function Home() {
         <br></br>
         <br></br>
         <br></br>
-        {/* <CardHoverEffectDemo projects={projects} />
-         */}
         <CardHoverEffectDemo projects={users} />
       </div>
     </div>

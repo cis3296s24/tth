@@ -19,8 +19,8 @@ const sidebarNavItems = [
     href: "/profile/account",
   },
   {
-    title: "Trading",
-    href: "/profile/trading",
+    title: "Post",
+    href: "/profile/post",
   },
   {
     title: "Messaging",

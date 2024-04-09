@@ -36,15 +36,15 @@ export default function Page({ params }: any) {
       });
       setUsers(usersData);
 
-//////Current User
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    setCurrentUser(user);
-  } else {
-    //if user not log in 
-    setCurrentUser(null);
-  }
-});
+  //Current User
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setCurrentUser(user);
+    } else {
+      //if user not log in 
+      setCurrentUser(null);
+    }
+  });
 
     }
 
@@ -97,7 +97,7 @@ function BackgroundGradientDemo({ project, currentUser }: { project: Items; curr
             Your browser does not support the video tag.
           </video>
         )}
-</div>
+        </div>
         <div className="flex justify-between items-center text-base sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
           {project.title} 
           {currentUser&&
