@@ -20,7 +20,7 @@ function DeleteButton({
   const fireDB = getFirestore();
   const router = useRouter();
 
-  const deleteItemes = async () => {
+  const deleteItems = async () => {
     try {
       console.log(projectID);
       if (projectID.user_id === currentUserID) {
@@ -42,7 +42,7 @@ function DeleteButton({
     <>
       {projectID.user_id === currentUserID && (
         <button
-          onClick={deleteItemes}
+          onClick={deleteItems}
           className="bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-2 rounded"
         >
           Delete Post
