@@ -19,7 +19,7 @@ const sidebarNavItems = [
     href: "/profile/account",
   },
   {
-    title: "Post",
+    title: "Posts",
     href: "/profile/post",
   },
   {
@@ -32,7 +32,7 @@ const sidebarNavItems = [
     href: "/profile/logout",
   },
 
-  
+
   // {
   //   title: "Notifications",
   //   href: "/examples/forms/notifications",
