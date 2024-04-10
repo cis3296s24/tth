@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useRouter } from "next/navigation";
 import { deleteDoc, doc, getFirestore } from "firebase/firestore";
 
@@ -10,42 +10,46 @@ interface Items {
   description: string;
   user_id: string;
 }
-function DeleteButton({ projectID, currentUserID }: { projectID: Items; currentUserID: string }) {
-    const fireDB = getFirestore();
-    const router = useRouter();
+function DeleteButton({
+  projectID,
+  currentUserID,
+}: {
+  projectID: Items;
+  currentUserID: string;
+}) {
+  const fireDB = getFirestore();
+  const router = useRouter();
 
-    const deleteItemes=async()=>{
-         try {
-         console.log(projectID)
-        if(projectID.user_id === currentUserID){
-      // Get reference to the document
-      const docRef = doc(fireDB, 'Item', projectID.id);
-      // Delete the document
-      await deleteDoc(docRef);
-  
-      console.log('Document successfully deleted!');
-      router.push('/feed');
-       }
+  const deleteItemes = async () => {
+    try {
+      console.log(projectID);
+      if (projectID.user_id === currentUserID) {
+        // Get reference to the document
+        const docRef = doc(fireDB, "Item", projectID.id);
+        // Delete the document
+        await deleteDoc(docRef);
 
-        else{
-          console.log('You do not have permission to delete it');
-        }
-
-
+        console.log("Document successfully deleted!");
+        router.push("/feed");
+      } else {
+        console.log("You do not have permission to delete it");
+      }
     } catch (error) {
-      console.error('Error deleting document:', error);
+      console.error("Error deleting document:", error);
     }
-
-    };
+  };
   return (
     <>
-    {projectID.user_id === currentUserID &&
-    <button  onClick={deleteItemes} 
-    className="bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-2 rounded">Delete Post</button>
-    }
-   
+      {projectID.user_id === currentUserID && (
+        <button
+          onClick={deleteItemes}
+          className="bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-2 rounded"
+        >
+          Delete Post
+        </button>
+      )}
     </>
-  )
+  );
 }
 
-export default DeleteButton
+export default DeleteButton;
