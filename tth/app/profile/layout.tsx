@@ -23,6 +23,10 @@ const sidebarNavItems = [
     href: "/profile/post",
   },
   {
+    title: "Sold Items",
+    href: "/profile/sold",
+  },
+  {
     title: "Messaging",
     href: "/profile/messaging",
   },
@@ -32,7 +36,7 @@ const sidebarNavItems = [
     href: "/profile/logout",
   },
 
-  
+
   // {
   //   title: "Notifications",
   //   href: "/examples/forms/notifications",
