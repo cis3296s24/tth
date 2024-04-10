@@ -1,5 +1,5 @@
-"use client"
-import { useState, useEffect } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { ref, uploadBytes, getDownloadURL, StorageReference } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { storage, firestore } from "../firebase";
@@ -14,6 +14,7 @@ const CreateListing: React.FC = () => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [selectedTag, setSelectedTag] = useState<string>(""); // State for selected tag
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const CreateListing: React.FC = () => {
       if (user) {
         setCurrentUser(user);
       } else {
-        //if user not log in 
+        //if user not log in
         setCurrentUser(null);
         window.location.href = "/login";
       }
@@ -39,8 +40,12 @@ const CreateListing: React.FC = () => {
     setDescription(event.target.value);
   };
 
+  const handleTagChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedTag(event.target.value);
+  };
+
   const uploadImage = async () => {
-    if (!imageUpload || !currentUser || !title || !description) {
+    if (!imageUpload || !currentUser || !title || !description || !selectedTag) {
       setError("Please fill in all required fields.");
       return;
     }
@@ -63,6 +68,7 @@ const CreateListing: React.FC = () => {
         title: title,
         description: description,
         link: downloadUrl,
+        tag: selectedTag, // Save the selected tag with the data
         user_id: currentUser.uid, // Save the current user's ID with the data
         createdAt: new Date(),
       });
@@ -71,6 +77,7 @@ const CreateListing: React.FC = () => {
       // Reset input fields after submission
       setTitle("");
       setDescription("");
+      setSelectedTag("");
       setError("");
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -112,8 +119,17 @@ const CreateListing: React.FC = () => {
         style={{ width: "100%", padding: "8px", marginBottom: "10px", borderRadius: "5px", border: "1px solid #ccc", color: "black" }}
       ></textarea>
       <br />
+      {/* Tag dropdown */}
+      <select value={selectedTag} onChange={handleTagChange} style={{ width: "100%", padding: "8px", marginBottom: "10px", borderRadius: "5px", border: "1px solid #ccc", color: "black" }}>
+        <option value="">Select Tag</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Books">Books</option>
+        <option value="Clothes">Clothes</option>
+        {/* Add more options as needed */}
+      </select>
+      <br />
       <button type="button" onClick={uploadImage} style={{ padding: "10px 20px", background: "#007bff", color: "#fff", border: "none", borderRadius: "5px", cursor: "pointer" }}> Upload </button>
-  
+
 
       {/* Render the uploaded image */}
       {imageUrl && (
