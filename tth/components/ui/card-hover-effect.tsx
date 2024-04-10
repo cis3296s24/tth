@@ -19,7 +19,6 @@ export const HoverEffect = ({
   className?: string;
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  
 
   return (
     <div
@@ -57,7 +56,10 @@ export const HoverEffect = ({
             <CardTitle>{item.title}</CardTitle>
             <CardDescription>
               {/* Render image or video based on link */}
-              {item.link.includes(".mp4") || item.link.includes(".webm") || item.link.includes(".ogg") || item.link.includes(".mov") ? (
+              {item.link.includes(".mp4") ||
+              item.link.includes(".webm") ||
+              item.link.includes(".ogg") ||
+              item.link.includes(".mov") ? (
                 <video width="300" height="300" controls autoPlay muted loop>
                   <source src={item.link} type="video/mp4" />
                   Your browser does not support the video tag.
