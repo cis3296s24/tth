@@ -19,6 +19,7 @@ import { auth, db } from "../firebase";
 import { Item } from "@radix-ui/react-select";
 import DeleteButton from "@/components/ui/DeleteButton";
 import { onAuthStateChanged, User } from "firebase/auth";
+import EditButton from "@/components/ui/EditButton";
 
 interface Items {
   id: string;
@@ -104,10 +105,13 @@ function BackgroundGradientDemo({
           )}
         </div>
         <div className="flex justify-between items-center text-base sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
-          {project.title}
-          {currentUser && (
-            <DeleteButton projectID={project} currentUserID={currentUser.uid} />
-          )}
+          {project.title} 
+          {currentUser&&
+          <>
+          <EditButton projectID={project} currentUserID={currentUser.uid}/>
+          <DeleteButton projectID={project} currentUserID={currentUser.uid}/>
+          </>
+}
         </div>
 
         <div className="text-sm text-neutral-600 dark:text-neutral-400">
