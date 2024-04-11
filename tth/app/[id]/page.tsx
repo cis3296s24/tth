@@ -26,6 +26,8 @@ interface Items {
   link: string;
   tag: string;
   description: string;
+  sold: boolean;
+  buyer: string;
   user_id: string;
 }
 

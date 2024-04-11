@@ -67,6 +67,8 @@ const CreateListing: React.FC = () => {
       const docRef = await addDoc(collection(firestore, "Item"), {
         title: title,
         description: description,
+        sold: false,
+        buyer: "",
         link: downloadUrl,
         tag: selectedTag, // Save the selected tag with the data
         user_id: currentUser.uid, // Save the current user's ID with the data
