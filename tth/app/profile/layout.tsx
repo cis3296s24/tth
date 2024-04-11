@@ -23,6 +23,10 @@ const sidebarNavItems = [
     href: "/profile/post",
   },
   {
+    title: "Bought",
+    href: "/profile/bought",
+  },
+  {
     title: "Sold Items",
     href: "/profile/sold",
   },

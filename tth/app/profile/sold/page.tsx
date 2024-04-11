@@ -33,7 +33,7 @@ export default function Home() {
     try {
       const q = query(collection(db, "Item"),
                       where("user_id", "==", userId),
-                      where("sold", "==", true)); // Add condition for sold field
+                      where("sold", "==", true));
       const querySnapshot = await getDocs(q);
       const projects: Items[] = [];
       querySnapshot.forEach((doc: DocumentData) => {
