@@ -22,7 +22,7 @@
     "framer-motion": "^11.0.24",
     "lucide-react": "^0.363.0",
     "next": "14.1.4",
-    "node": "^18.20.0",
+    "node": "^18.20.2",
     "radix-ui": "^1.0.1",
     "react": "^18",
     "react-dom": "^18",
