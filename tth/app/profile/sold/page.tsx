@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { getFirestore, collection, getDocs, DocumentData, where, query } from "firebase/firestore";
@@ -11,6 +11,7 @@ interface Items {
   tag: string;
   description: string;
   user_id: string;
+  sold: boolean; // Assuming there's a field named "sold"
 }
 
 interface Props {
@@ -31,8 +32,8 @@ export default function Home() {
   async function fetchCurrentUserProjects(userId: string) {
     try {
       const q = query(collection(db, "Item"),
-        where("user_id", "==", userId),
-        where("sold", "==", false));
+                      where("user_id", "==", userId),
+                      where("sold", "==", true));
       const querySnapshot = await getDocs(q);
       const projects: Items[] = [];
       querySnapshot.forEach((doc: DocumentData) => {
@@ -62,4 +63,3 @@ function CardHoverEffectDemo({ projects }: Props) {
     </div>
   );
 }
-
