@@ -1,6 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { ref, uploadBytes, getDownloadURL, StorageReference } from "firebase/storage";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  StorageReference,
+} from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { storage, firestore } from "../firebase";
 import { auth } from "../../app/firebase";
@@ -36,7 +41,9 @@ const CreateListing: React.FC = () => {
     setTitle(event.target.value);
   };
 
-  const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleDescriptionChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setDescription(event.target.value);
   };
 
@@ -45,12 +52,21 @@ const CreateListing: React.FC = () => {
   };
 
   const uploadImage = async () => {
-    if (!imageUpload || !currentUser || !title || !description || !selectedTag) {
+    if (
+      !imageUpload ||
+      !currentUser ||
+      !title ||
+      !description ||
+      !selectedTag
+    ) {
       setError("Please fill in all required fields.");
       return;
     }
 
-    const imageRef: StorageReference = ref(storage, `images/${imageUpload.name + uuidv4()}`);
+    const imageRef: StorageReference = ref(
+      storage,
+      `images/${imageUpload.name + uuidv4()}`
+    );
 
     try {
       // Upload image to storage
@@ -81,6 +97,10 @@ const CreateListing: React.FC = () => {
       setDescription("");
       setSelectedTag("");
       setError("");
+
+      setTimeout(function () {
+        window.location.href = "/" + docRef.id;
+      }, 1000);
     } catch (error) {
       console.error("Error uploading image:", error);
       // Handle error
@@ -111,18 +131,43 @@ const CreateListing: React.FC = () => {
         placeholder="Title"
         value={title}
         onChange={handleTitleChange}
-        style={{ width: "100%", padding: "8px", marginBottom: "10px", borderRadius: "5px", border: "1px solid #ccc", color: "black" }}
+        style={{
+          width: "100%",
+          padding: "8px",
+          marginBottom: "10px",
+          borderRadius: "5px",
+          border: "1px solid #ccc",
+          color: "black",
+        }}
       />
       <br />
       <textarea
         placeholder="Description"
         value={description}
         onChange={handleDescriptionChange}
-        style={{ width: "100%", padding: "8px", marginBottom: "10px", borderRadius: "5px", border: "1px solid #ccc", color: "black" }}
+        style={{
+          width: "100%",
+          padding: "8px",
+          marginBottom: "10px",
+          borderRadius: "5px",
+          border: "1px solid #ccc",
+          color: "black",
+        }}
       ></textarea>
       <br />
       {/* Tag dropdown */}
-      <select value={selectedTag} onChange={handleTagChange} style={{ width: "100%", padding: "8px", marginBottom: "10px", borderRadius: "5px", border: "1px solid #ccc", color: "black" }}>
+      <select
+        value={selectedTag}
+        onChange={handleTagChange}
+        style={{
+          width: "100%",
+          padding: "8px",
+          marginBottom: "10px",
+          borderRadius: "5px",
+          border: "1px solid #ccc",
+          color: "black",
+        }}
+      >
         <option value="">Select Tag</option>
         <option value="Electronics">Electronics</option>
         <option value="Books">Books</option>
@@ -130,12 +175,33 @@ const CreateListing: React.FC = () => {
         {/* Add more options as needed */}
       </select>
       <br />
-      <button type="button" onClick={uploadImage} style={{ padding: "10px 20px", background: "#007bff", color: "#fff", border: "none", borderRadius: "5px", cursor: "pointer" }}> Upload </button>
-
+      <button
+        type="button"
+        onClick={uploadImage}
+        style={{
+          padding: "10px 20px",
+          background: "#007bff",
+          color: "#fff",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }}
+      >
+        {" "}
+        Upload{" "}
+      </button>
 
       {/* Render the uploaded image */}
       {imageUrl && (
-        <div style={{ marginTop: "20px", border: "1px solid #ccc", padding: "10px", width: "200px", margin: "auto" }}>
+        <div
+          style={{
+            marginTop: "20px",
+            border: "1px solid #ccc",
+            padding: "10px",
+            width: "200px",
+            margin: "auto",
+          }}
+        >
           <img src={imageUrl} alt="Uploaded" style={{ maxWidth: "100%" }} />
         </div>
       )}
