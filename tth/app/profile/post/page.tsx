@@ -65,7 +65,13 @@ export default function Home() {
 function CardHoverEffectDemo({ projects }: Props) {
   return (
     <div>
+
+      <div>
+        <h3 className="text-lg font-medium">My Posts</h3>
+      </div>
+      <div className="max-w-5xl mx-auto px-8">
       <div className="">
+        
         <HoverEffect items={projects} />
       </div>
     </div>

@@ -129,6 +129,7 @@ updateDoc(docRefs, {
     })
     .then(() => {
       setSucessUpdate(true);
+      router.push("/profile/post");
     })
     .catch((error) => {
         console.error("Error updating document: ", error);
