@@ -1,19 +1,19 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { HoverEffect } from "../../components/ui/card-hover-effect";
-import { initializeApp } from "firebase/app";
-import { getFirestore, orderBy } from "firebase/firestore";
-import { collection, getDocs, DocumentData, query, } from "firebase/firestore";
 import { db } from "../firebase";
-
+import { getDocs, query, collection, orderBy, where, DocumentData, Timestamp } from "firebase/firestore";
 
 interface Items {
+  createdAt: Timestamp;
   id: string;
   title: string;
   link: string;
   tag: string;
   description: string;
   user_id: string;
+  sold: boolean;
 }
 
 interface Props {
@@ -26,25 +26,7 @@ export default function Home() {
   const [projects, setProjects] = useState<Items[]>([]);
   const [selectedItem, setSelectedItem] = useState<string | null>("Default");
 
-  const [users, setUsers] = useState<Items[]>([]);
-
   useEffect(() => {
-    async function fetchItems() {
-      try {
-        // Query Firestore collection "Item" and order by createdAt in descending order
-        const q = query(collection(db, "Item"), orderBy("createdAt", "desc"));
-        const querySnapshot = await getDocs(q);
-        const data: Items[] = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        } as Items));
-        setUsers(data);
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-    
     async function fetchData() {
       try {
         const querySnapshot = await getDocs(collection(db, "Item"));
@@ -52,28 +34,27 @@ export default function Home() {
         querySnapshot.forEach((doc: DocumentData) => {
           usersData.push({ id: doc.id, ...doc.data() });
         });
-        console.log(usersData);
 
-        const filteredItems = selectedItem
-          ? usersData.filter((item) => item.tag === selectedItem)
-          : usersData;
+        let filteredItems = usersData.filter((item) => !item.sold);
 
-        setUsers(filteredItems);
+        if (selectedItem && selectedItem !== "Default") {
+          filteredItems = filteredItems.filter((item) => item.tag === selectedItem);
+        }
+
+        // Order the filtered items by createdAt in descending order
+        filteredItems.sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
+
+        setProjects(filteredItems);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
-    if(selectedItem === "Default"){
-      fetchItems();
-    }else{
-      fetchData();
-    }
 
-    
+    fetchData();
   }, [selectedItem]);
 
   const handleSelectChange = (value: string) => {
-    setSelectedItem(value === selectedItem ? null : value); // Toggle selection if the same item is clicked again
+    setSelectedItem(value === selectedItem ? null : value);
   };
 
   return (
@@ -82,7 +63,7 @@ export default function Home() {
         <br />
         <select
           id="item"
-          value={selectedItem || ""} // Set the value to selectedItem or an empty string
+          value={selectedItem || ""}
           onChange={(e) => {
             handleSelectChange(e.target.value);
           }}
@@ -98,7 +79,7 @@ export default function Home() {
       </label>
       <div className="text-center">
         <div>
-          <CardHoverEffectDemo projects={users} />
+          <CardHoverEffectDemo projects={projects} />
         </div>
       </div>
     </div>
