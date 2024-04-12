@@ -3,9 +3,8 @@ import React, { useState, useEffect } from "react";
 import { HoverEffect } from "../../components/ui/card-hover-effect";
 import { initializeApp } from "firebase/app";
 import { getFirestore, orderBy } from "firebase/firestore";
-import { collection, getDocs, DocumentData, query, } from "firebase/firestore";
+import { collection, getDocs, DocumentData, query } from "firebase/firestore";
 import { db } from "../firebase";
-
 
 interface Items {
   id: string;
@@ -20,7 +19,7 @@ interface Props {
   projects: Items[];
 }
 
-const items = ["Books", "Electronics"];
+const items = ["Books", "Electronics", "Clothes"];
 
 export default function Home() {
   const [projects, setProjects] = useState<Items[]>([]);
@@ -34,17 +33,20 @@ export default function Home() {
         // Query Firestore collection "Item" and order by createdAt in descending order
         const q = query(collection(db, "Item"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
-        const data: Items[] = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        } as Items));
+        const data: Items[] = querySnapshot.docs.map(
+          (doc) =>
+            ({
+              id: doc.id,
+              ...doc.data(),
+            } as Items)
+        );
         setUsers(data);
         console.log(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
-    
+
     async function fetchData() {
       try {
         const querySnapshot = await getDocs(collection(db, "Item"));
@@ -63,13 +65,11 @@ export default function Home() {
         console.error("Error fetching data:", error);
       }
     }
-    if(selectedItem === "Default"){
+    if (selectedItem === "Default") {
       fetchItems();
-    }else{
+    } else {
       fetchData();
     }
-
-    
   }, [selectedItem]);
 
   const handleSelectChange = (value: string) => {

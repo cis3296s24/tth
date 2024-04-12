@@ -1,5 +1,4 @@
-"use client";
-// Import necessary modules
+"use client"; // Import necessary modules
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import React from "react";
@@ -14,6 +13,12 @@ import {
   deleteDoc,
   doc,
   getFirestore,
+  getDoc,
+  addDoc,
+  query,
+  setDoc,
+  updateDoc,
+  arrayUnion,
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { Item } from "@radix-ui/react-select";
@@ -35,6 +40,63 @@ interface Items {
 export default function Page({ params }: any) {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [users, setUsers] = useState<Items[]>([]);
+  const itemId = params.id;
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+    return () => unsubscribe(); // Unsubscribe from the auth state listener on unmount
+  }, []);
+
+  async function handleTrading(itemId: string) {
+    if (!currentUser || !itemId) {
+      console.log(itemId);
+      console.log(currentUser);
+      return;
+    }
+
+    try {
+      const docRef = doc(db, "Transaction", itemId);
+      const transactionSnap = await getDoc(docRef);
+
+      if (!transactionSnap.exists()) {
+        // If no transaction document exists, create a new one
+        const itemDocRef = doc(db, "Item", itemId);
+        const itemSnap = await getDoc(itemDocRef);
+
+        if (itemSnap.exists()) {
+          const itemData = itemSnap.data();
+
+          const newTransactionRef = await setDoc(
+            doc(db, "Transaction", itemId),
+            {
+              ItemId: itemId,
+              SellerId: itemData.user_id,
+              BuyerIds: [currentUser.uid], // Include the current user ID in the array
+            }
+          );
+          // Alert the user that the item has been successfully added
+          alert("Item successfully added to the transaction list!");
+        } else {
+          console.log("Item not found:", itemId);
+          // Handle the case where the item document doesn't exist
+        }
+      } else {
+        // If a transaction document exists, update it to add the item ID
+        await updateDoc(docRef, {
+          BuyerIds: arrayUnion(currentUser.uid),
+        });
+        console.log("Transaction updated:", itemId);
+        // Alert the user that the item has been successfully added
+        alert("Item successfully added to the transaction list!");
+      }
+
+      console.log("Item added to transaction successfully!");
+    } catch (error) {
+      console.error("Error updating transaction:", error);
+    }
+  }
 
   useEffect(() => {
     async function fetchItems() {
@@ -69,7 +131,12 @@ export default function Page({ params }: any) {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <BackgroundGradientDemo project={item} currentUser={currentUser} />
+      <BackgroundGradientDemo
+        project={item}
+        currentUser={currentUser}
+        onTradeItem={handleTrading}
+        itemId={itemId}
+      />
     </div>
   );
 }
@@ -77,11 +144,14 @@ export default function Page({ params }: any) {
 function BackgroundGradientDemo({
   project,
   currentUser,
+  onTradeItem,
+  itemId,
 }: {
   project: Items;
   currentUser: User | null;
+  onTradeItem: (itemId: string) => void;
+  itemId: string;
 }) {
-
   return (
     <div className="max-w-sm rounded-[22px] overflow-hidden">
       <BackgroundGradient className="p-4 sm:p-10 bg-white dark:bg-zinc-900">
@@ -105,13 +175,23 @@ function BackgroundGradientDemo({
           )}
         </div>
         <div className="flex justify-between items-center text-base sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
-          {project.title} 
-          {currentUser&&
-          <>
-          <EditButton projectID={project} currentUserID={currentUser.uid}/>
-          <DeleteButton projectID={project} currentUserID={currentUser.uid}/>
-          </>
-}
+          {project.title}
+          {currentUser && project.user_id === currentUser.uid ? (
+            <>
+              <EditButton projectID={project} currentUserID={currentUser.uid} />
+              <DeleteButton
+                projectID={project}
+                currentUserID={currentUser.uid}
+              />
+            </>
+          ) : (
+            <button
+              onClick={() => onTradeItem(itemId)}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Trade Item
+            </button>
+          )}
         </div>
 
         <div className="text-sm text-neutral-600 dark:text-neutral-400">
