@@ -121,36 +121,44 @@ const EditListing: React.FC = () => {
   };
 
   //////Item Updates
-  const updatetemes = () => {
-    try {
-      if (!currentUser) {
-        console.error("No user is currently logged in.");
-        return; // Exit function early if no user is logged in
-      }
-      // Update data to Firestore
-      if (postid) {
-        const docRefs = doc(db, "Item", postid);
-        updateDoc(docRefs, {
-          title: title,
-          description: description,
-          link: imageUrl,
-          user_id: currentUser.uid,
-          createdAt: new Date(),
-        })
-          .then(() => {
-            setSucessUpdate(true);
-          })
-          .catch((error) => {
-            console.error("Error updating document: ", error);
-            setError(error);
-          });
-      } else {
-        console.error("postid is null or undefined");
-      }
-    } catch (error) {
-      console.error("Error updating document: ", error);
-    }
-  };
+const updatetemes=()=>{
+  try {
+  if (!currentUser) {
+    console.error("No user is currently logged in.");
+    return; // Exit function early if no user is logged in
+}
+ // Update data to Firestore
+ if (postid) {
+ const docRefs = doc(db, "Item", postid);
+updateDoc(docRefs, {
+      title: title,
+      description: description,
+      link: imageUrl,
+      user_id: currentUser.uid,
+      createdAt: new Date(),
+    })
+    .then(() => {
+      setSucessUpdate(true);
+      router.push("/profile/post");
+    })
+    .catch((error) => {
+        console.error("Error updating document: ", error);
+        setError(error);
+    });
+  }
+  else{
+    console.error("postid is null or undefined");
+  }
+
+  }
+ catch (error) {
+    console.error("Error updating document: ", error);
+}
+};
+
+const isImage = imageUrl && (imageUrl.includes(".jpg") || imageUrl.includes(".jpeg") || imageUrl.includes(".PNG") || imageUrl.includes(".png") || imageUrl.includes(".gif") || imageUrl.includes(".pdf"));
+const isVideo = imageUrl && (imageUrl.includes(".mp4") || imageUrl.includes(".webm") || imageUrl.includes(".ogg") || imageUrl.includes(".mov"));
+
 
   const isImage =
     imageUrl &&
