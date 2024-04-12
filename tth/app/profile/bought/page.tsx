@@ -44,7 +44,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className="">
       <div className="text-center">
         <CardHoverEffectDemo projects={currentUserProjects} />
       </div>
@@ -56,7 +56,7 @@ export default function Home() {
 function CardHoverEffectDemo({ projects }: Props) {
   return (
     <div>
-      <div className="max-w-5xl mx-auto px-8">
+      <div className="">
         <HoverEffect items={projects} />
       </div>
     </div>
