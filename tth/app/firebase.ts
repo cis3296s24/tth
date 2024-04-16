@@ -4,11 +4,13 @@ import { getAuth } from "firebase/auth";
 //import { getAnalytics } from "firebase/analytics";
 import {getFirestore} from "@firebase/firestore"
 import { getStorage, FirebaseStorage } from "firebase/storage";
+import { getDatabase } from "firebase/database";
 
 
 const firebaseConfig = {
   apiKey: "AIzaSyAnPs18NOhGcVCtgyrxlSRSj9ePqVMxJY4",
   authDomain: "temple-trading-hub-tth.firebaseapp.com",
+  databaseURL: "https://temple-trading-hub-tth-default-rtdb.firebaseio.com",
   projectId: "temple-trading-hub-tth",
   storageBucket: "temple-trading-hub-tth.appspot.com",
   messagingSenderId: "64770184657",
@@ -22,6 +24,7 @@ export const auth = getAuth(app);
 
 //databsae 
 export const db = getFirestore(app);
+export const Realtimedb = getDatabase(app);
 
 //get storage 
 export const storage: FirebaseStorage = getStorage(app);
