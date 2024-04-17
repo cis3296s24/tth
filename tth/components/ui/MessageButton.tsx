@@ -10,6 +10,7 @@ interface Items {
   tag: string;
   description: string;
   user_id: string;
+  email:string;
 }
 
 function MessageButton({
@@ -38,7 +39,8 @@ function MessageButton({
             ID: `${currentUserID}${projectID.user_id}`,
             User_to: currentUserID,
             User_from: projectID.user_id,
-            Status: true
+            Status: true,
+            Email_from: projectID.email
           });
           router.push(`message/${currentUserID}${projectID.user_id}`);
         }
