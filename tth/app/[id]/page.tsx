@@ -36,6 +36,7 @@ interface Items {
   sold: boolean;
   buyer: string;
   user_id: string;
+  email: string;
 }
 
 export default function Page({ params }: any) {
@@ -200,7 +201,7 @@ function BackgroundGradientDemo({
         </div>
         <br></br>
         <div className="text-sm text-neutral-600 dark:text-neutral-400">
-          <h1>contact me: {project.user_id}</h1>
+          {/* <h1>contact me: {project.user_id}</h1> */}
         </div>
         <div className="flex justify-center items-center text-sm text-neutral-600 dark:text-neutral-400">
         {currentUser &&
