@@ -16,9 +16,11 @@ interface Items {
 function MessageButton({
   projectID,
   currentUserID,
+  currentUserEmail,
 }: {
   projectID: Items;
   currentUserID: string;
+  currentUserEmail: string;
 }) {
   const db =getDatabase();
   const fireDB = getFirestore();
@@ -41,6 +43,7 @@ function MessageButton({
             User_from: projectID.user_id,
             Status: true,
             Email_from: projectID.email,
+            Email_to: currentUserEmail,
           });
           router.push(`message/${currentUserID}${projectID.user_id}`);
         }

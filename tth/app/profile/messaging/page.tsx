@@ -14,6 +14,7 @@ interface Message {
   User_from: string;
   User_to: string;
   Email_from: string;
+  Email_to: string;
   item_title: string;
 }
 interface ChatItem {
@@ -35,7 +36,7 @@ export default function SettingsAccountPage() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUserID(user.uid);
-        setCurrentUserEmail(user.email);
+        // setCurrentUserEmail(user.email);
         const messageRef = ref(Realtimedb, `Messages`);
         onValue(messageRef, (snapshot) => {
           if (snapshot.exists()) {
@@ -79,10 +80,10 @@ export default function SettingsAccountPage() {
                 }
               >
               <span>
-                  {message.user_id == currentUserID ? 
-                      <p>This is the current user: {currentUserEmail}. Post from: {message.Email_from}</p> :
                       <p>Message from: {message.Email_from}</p>
-                  }
+                      <p>Message to: {message.Email_to}</p>
+                  
+                  {/* <p>Post from: {message.Email_from}</p> */}
               </span>
 
                 <button

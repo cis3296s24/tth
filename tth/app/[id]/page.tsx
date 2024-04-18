@@ -41,16 +41,19 @@ interface Items {
 
 export default function Page({ params }: any) {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUserEmail, setCurrentUserEmail] = useState<string>("");
   const [users, setUsers] = useState<Items[]>([]);
   const itemId = params.id;
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
+      // setCurrentUserEmail();
     });
     return () => unsubscribe(); // Unsubscribe from the auth state listener on unmount
   }, []);
 
+  console.log(currentUser?.email);
   async function handleTrading(itemId: string) {
     if (!currentUser || !itemId) {
       console.log(itemId);
@@ -206,7 +209,7 @@ function BackgroundGradientDemo({
         </div>
         <div className="flex justify-center items-center text-sm text-neutral-600 dark:text-neutral-400">
         {currentUser &&
-         <MessageButton projectID={project} currentUserID={currentUser.uid}/>
+         <MessageButton projectID={project} currentUserID={currentUser.uid} currentUserEmail={currentUser.email || ""}/>
         }
         </div>
       </BackgroundGradient>
