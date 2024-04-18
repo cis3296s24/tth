@@ -31,7 +31,7 @@ function MessageButton({
       if (projectID.user_id && currentUserID) {
         const messageRef = ref(
           db,
-          `Messages/${currentUserID}${projectID.user_id}`
+          `Messages/${currentUserID}${projectID.user_id}${projectID.id}`
         );
         // Check if the message room already exists
         const snapshot = await get(messageRef);
@@ -49,7 +49,9 @@ function MessageButton({
             Email_to: projectID.email,
             itemId: projectID.id,
           });
-          router.push(`message/${currentUserID}${projectID.user_id}`);
+          router.push(
+            `message/${currentUserID}${projectID.user_id}${projectID.id}`
+          );
         }
       } else {
         console.log("Invalid Message");

@@ -3,10 +3,24 @@ import { Separator } from "@/components/ui/separator";
 import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getDatabase, onValue, ref, update } from "firebase/database";
-import { auth, Realtimedb } from "@/app/firebase";
+import { auth, Realtimedb, db } from "@/app/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { userAgent } from "next/server";
+import {
+  collection,
+  getDocs,
+  DocumentData,
+  deleteDoc,
+  doc,
+  getFirestore,
+  getDoc,
+  addDoc,
+  query,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
 
 interface Message {
   user_id: User | null;
@@ -17,14 +31,15 @@ interface Message {
   Email_from: string;
   Email_to: string;
   item_title: string;
+  itemId: string;
 }
 interface ChatItem {
   ID: string;
   Status: boolean;
   User_from: string;
   User_to: string;
-  Email_from: string,
-  Email_to: string,
+  Email_from: string;
+  Email_to: string;
   chat: Record<string, { ID: number; text: string; user_id: string }>;
 }
 export default function SettingsAccountPage() {
@@ -39,6 +54,7 @@ export default function SettingsAccountPage() {
         setCurrentUserID(user.uid);
         setCurrentUserEmail(user.email);
         const messageRef = ref(Realtimedb, `Messages`);
+
         onValue(messageRef, (snapshot) => {
           if (snapshot.exists()) {
             const MessageData = snapshot.val();
@@ -59,8 +75,8 @@ export default function SettingsAccountPage() {
     return () => unsubscribe();
   }, [auth, setCurrentUserID]);
 
-  const messagehandel = (id: string) => {
-    router.push(`/message/${id}`);
+  const messagehandel = (id: string, id2: string) => {
+    router.push(`/message/${id}${id2}`);
   };
   return (
     <div className="space-y-6">
@@ -80,14 +96,23 @@ export default function SettingsAccountPage() {
                   "flex justify-between items-center bg-gray-300 text-black rounded-lg p-2 my-1 mr-auto"
                 }
               >
-                {currentUserEmail == message.Email_to ? <p>{message.Email_from}</p> : <p> {message.Email_to}</p>}
-                  <span>
-                          {/* <p>Message from: {message.Email_from}</p> */}
-                          {/* <p>current User : {message.Email_to}</p> */}
-                  </span>
+                {currentUserEmail == message.Email_to ? (
+                  <p>
+                    {message.Email_from} Item: {message.itemId}
+                  </p>
+                ) : (
+                  <p>
+                    {" "}
+                    {message.Email_to} Item: {message.itemId}
+                  </p>
+                )}
+                <span>
+                  {/* <p>Message from: {message.Email_from}</p> */}
+                  {/* <p>current User : {message.Email_to}</p> */}
+                </span>
 
                 <button
-                  onClick={(e) => messagehandel(message?.ID)}
+                  onClick={(e) => messagehandel(message?.ID, message?.itemId)}
                   className="bg-transparent border border-gray-500 text-gray-500 hover:text-gray-600 hover:border-gray-600 mt-2 py-2 px-4 rounded"
                 >
                   contact
