@@ -6,7 +6,9 @@ import Link from "next/link";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { collection, getDocs, DocumentData } from "firebase/firestore";
-import { db } from "./firebase";
+import { auth, db } from "./firebase";
+import { onAuthStateChanged } from "firebase/auth";
+
 
 interface Project {
   title: string;
@@ -76,7 +78,9 @@ function CardHoverEffectDemo({ projects }: Props) {
   );
 }
 function TypewriterEffectSmoothDemo() {
+
   // A web-based service to trade items with security
+  const { user } = useAuth();
 
   const words = [
     {
@@ -105,24 +109,49 @@ function TypewriterEffectSmoothDemo() {
       className: "text-blue-500 dark:text-blue-500",
     },
   ];
+
   return (
-    <div className="flex flex-col items-center justify-center h-[40rem]  ">
-      <p className="text-neutral-600 dark:text-neutral-200 text-xs sm:text-base  ">
+    <div className="flex flex-col items-center justify-center h-[40rem]">
+      <p className="text-neutral-600 dark:text-neutral-200 text-xs sm:text-base">
         Temple Trading Hub
       </p>
       <TypewriterEffectSmooth words={words} />
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
-        <Link href={"/signup"}>
+      {user ? ( // If user is logged in, render profile button
+        <Link href={"/profile"}>
           <button className="w-40 h-10 rounded-xl bg-black text-white border dark:border-white border-transparent text-sm hover:bg-white hover:text-black">
-            Sign Up
+            Profile
           </button>
         </Link>
-        <Link href={"/login"}>
-          <button className="w-40 h-10 rounded-xl bg-white text-black border border-black text-sm hover:bg-black hover:text-white hover:border-white">
-            Log In
-          </button>
-        </Link>
-      </div>
+      ) : ( // If user is not logged in, render sign up and log in buttons
+      <div className="flex">
+          <Link href={"/signup"}>
+            <button className="w-40 h-10 rounded-xl bg-black text-white border dark:border-white border-transparent text-sm hover:bg-white hover:text-black mr-2">
+              Sign Up
+            </button>
+          </Link>
+          <Link href={"/login"}>
+            <button className="w-40 h-10 rounded-xl bg-white text-black border border-black text-sm hover:bg-black hover:text-white hover:border-white">
+              Log In
+            </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
+}
+
+import { User } from "firebase/auth"; // Import User type from firebase authentication module
+
+export function useAuth() {
+  const [user, setUser] = useState<User | null>(null); // Specify the type as User | null
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  return { user };
 }
