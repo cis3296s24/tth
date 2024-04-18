@@ -36,20 +36,24 @@ interface Items {
   sold: boolean;
   buyer: string;
   user_id: string;
+  email: string;
 }
 
 export default function Page({ params }: any) {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUserEmail, setCurrentUserEmail] = useState<string>("");
   const [users, setUsers] = useState<Items[]>([]);
   const itemId = params.id;
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
+      // setCurrentUserEmail();
     });
     return () => unsubscribe(); // Unsubscribe from the auth state listener on unmount
   }, []);
 
+  console.log(currentUser?.email);
   async function handleTrading(itemId: string) {
     if (!currentUser || !itemId) {
       console.log(itemId);
@@ -150,6 +154,7 @@ function BackgroundGradientDemo({
 }: {
   project: Items;
   currentUser: User | null;
+  
   onTradeItem: (itemId: string) => void;
   itemId: string;
 }) {
@@ -200,11 +205,11 @@ function BackgroundGradientDemo({
         </div>
         <br></br>
         <div className="text-sm text-neutral-600 dark:text-neutral-400">
-          <h1>contact me: {project.user_id}</h1>
+          {/* <h1>contact me: {project.user_id}</h1> */}
         </div>
         <div className="flex justify-center items-center text-sm text-neutral-600 dark:text-neutral-400">
         {currentUser &&
-         <MessageButton projectID={project} currentUserID={currentUser.uid}/>
+         <MessageButton projectID={project} currentUserID={currentUser.uid} currentUserEmail={currentUser.email || ""}/>
         }
         </div>
       </BackgroundGradient>

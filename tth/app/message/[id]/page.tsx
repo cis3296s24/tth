@@ -14,6 +14,7 @@ interface Message {
 }
 const Message: React.FC = ({ params }: any) => {
   const [currentUserID, setCurrentUserID] =  useState<string | null>(null);
+  const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const router = useRouter();
@@ -23,6 +24,7 @@ const Message: React.FC = ({ params }: any) => {
   useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (user) => {
     if (user) {
+      setCurrentUserEmail(user.email)
       setCurrentUserID(user.uid);
       const messageRef = ref(Realtimedb, `Messages/${msgitemId}`);
       onValue(messageRef, (snapshot) => {

@@ -21,11 +21,13 @@ const CreateListing: React.FC = () => {
   const [description, setDescription] = useState<string>("");
   const [selectedTag, setSelectedTag] = useState<string>(""); // State for selected tag
   const [error, setError] = useState<string>("");
+  const [email, setEmail] = useState<string | null>("");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user);
+        setEmail(user.email);
       } else {
         //if user not log in
         setCurrentUser(null);
@@ -63,10 +65,11 @@ const CreateListing: React.FC = () => {
       return;
     }
 
-    const imageRef: StorageReference = ref(
-      storage,
-      `images/${imageUpload.name + uuidv4()}`
-    );
+  const imageRef: StorageReference = ref(
+    storage,
+    `images/${imageUpload.name + uuidv4()}`
+  );
+  
 
     try {
       // Upload image to storage
@@ -89,6 +92,7 @@ const CreateListing: React.FC = () => {
         tag: selectedTag, // Save the selected tag with the data
         user_id: currentUser.uid, // Save the current user's ID with the data
         createdAt: new Date(),
+        email: email,
       });
       console.log("Document written with ID: ", docRef.id);
 
@@ -97,6 +101,7 @@ const CreateListing: React.FC = () => {
       setDescription("");
       setSelectedTag("");
       setError("");
+      setEmail("")
 
       setTimeout(function () {
         window.location.href = "/" + docRef.id;
