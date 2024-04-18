@@ -48,6 +48,14 @@ function MessageButton({
             Email_from: currentUserEmail,
             Email_to: projectID.email,
             itemId: projectID.id,
+            chat: [
+              // Add your message at the top of the chat array
+              {
+                ID: 1,
+                user_id: currentUserID,
+                text: `Hello I want to buy your Item: ${projectID.id}`,
+              },
+            ],
           });
           router.push(
             `message/${currentUserID}${projectID.user_id}${projectID.id}`
