@@ -42,8 +42,8 @@ function MessageButton({
             User_to: currentUserID,
             User_from: projectID.user_id,
             Status: true,
-            Email_from: projectID.email,
-            Email_to: currentUserEmail,
+            Email_from: currentUserEmail,
+            Email_to: projectID.email,
           });
           router.push(`message/${currentUserID}${projectID.user_id}`);
         }

@@ -6,6 +6,7 @@ import { getDatabase, onValue, ref, update } from "firebase/database";
 import { auth, Realtimedb } from "@/app/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { userAgent } from "next/server";
 
 interface Message {
   user_id: User | null;
@@ -36,7 +37,7 @@ export default function SettingsAccountPage() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUserID(user.uid);
-        // setCurrentUserEmail(user.email);
+        setCurrentUserEmail(user.email);
         const messageRef = ref(Realtimedb, `Messages`);
         onValue(messageRef, (snapshot) => {
           if (snapshot.exists()) {
@@ -79,12 +80,11 @@ export default function SettingsAccountPage() {
                   "flex justify-between items-center bg-gray-300 text-black rounded-lg p-2 my-1 mr-auto"
                 }
               >
-              <span>
-                      <p>Message from: {message.Email_from}</p>
-                      <p>Message to: {message.Email_to}</p>
-                  
-                  {/* <p>Post from: {message.Email_from}</p> */}
-              </span>
+                {currentUserEmail == message.Email_to ? <p>{message.Email_from}</p> : <p> {message.Email_to}</p>}
+                  <span>
+                          {/* <p>Message from: {message.Email_from}</p> */}
+                          {/* <p>current User : {message.Email_to}</p> */}
+                  </span>
 
                 <button
                   onClick={(e) => messagehandel(message?.ID)}
