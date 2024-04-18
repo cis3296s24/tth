@@ -20,7 +20,7 @@ interface Props {
   projects: Items[];
 }
 
-const items = ["Books", "Electronics", "Clothes"];
+const items = ["Electronics", "Books", "Clothes", "Animals", "Accessories", "Vehicles", "Games", "Assignments", "Food"];
 
 export default function Home() {
   const [projects, setProjects] = useState<Items[]>([]);

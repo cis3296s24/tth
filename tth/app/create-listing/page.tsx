@@ -168,6 +168,13 @@ const CreateListing: React.FC = () => {
         <option value="Electronics">Electronics</option>
         <option value="Books">Books</option>
         <option value="Clothes">Clothes</option>
+        <option value="Animals">Animals</option>
+        <option value="Accessories">Accessories</option>
+        <option value="Vehicles">Vehicles</option>
+        <option value="Games">Games</option>
+        <option value="Assignments">Assignments</option>
+        <option value="Food">Food</option>
+
         {/* Add more options as needed */}
       </select>
       <br />
