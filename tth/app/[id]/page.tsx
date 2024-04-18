@@ -79,6 +79,7 @@ export default function Page({ params }: any) {
               ItemId: itemId,
               SellerId: itemData.user_id,
               BuyerIds: [currentUser.uid], // Include the current user ID in the array
+              buyer: "",
             }
           );
           // Alert the user that the item has been successfully added
@@ -154,7 +155,7 @@ function BackgroundGradientDemo({
 }: {
   project: Items;
   currentUser: User | null;
-  
+
   onTradeItem: (itemId: string) => void;
   itemId: string;
 }) {
@@ -191,12 +192,7 @@ function BackgroundGradientDemo({
               />
             </>
           ) : (
-            <button
-              onClick={() => onTradeItem(itemId)}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Trade Item
-            </button>
+            <></>
           )}
         </div>
 
@@ -208,9 +204,17 @@ function BackgroundGradientDemo({
           {/* <h1>contact me: {project.user_id}</h1> */}
         </div>
         <div className="flex justify-center items-center text-sm text-neutral-600 dark:text-neutral-400">
-        {currentUser &&
-         <MessageButton projectID={project} currentUserID={currentUser.uid} currentUserEmail={currentUser.email || ""}/>
-        }
+          {currentUser && (
+            <div>
+              <button onClick={() => onTradeItem(itemId)}>
+                <MessageButton
+                  projectID={project}
+                  currentUserID={currentUser.uid}
+                  currentUserEmail={currentUser.email || ""}
+                />
+              </button>
+            </div>
+          )}
         </div>
       </BackgroundGradient>
     </div>

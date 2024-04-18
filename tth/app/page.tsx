@@ -10,7 +10,6 @@ import { auth, db } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 
-
 interface Project {
   title: string;
   description: string;
@@ -28,6 +27,7 @@ interface Items {
   tag: string;
   description: string;
   user_id: string;
+  sold: boolean;
 }
 
 interface Props {
@@ -47,13 +47,13 @@ export default function Home() {
         usersData.push({ id: doc.id, ...doc.data() });
       });
 
-      console.log(usersData);
-      setUsers(usersData);
+      const filteredItems = usersData.filter((item) => item.sold === false);
+
+      setUsers(filteredItems);
     }
 
     fetchItems();
   }, []);
-
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-24">

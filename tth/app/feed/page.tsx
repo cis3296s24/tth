@@ -13,6 +13,7 @@ interface Items {
   tag: string;
   description: string;
   user_id: string;
+  sold: boolean;
 }
 
 interface Props {
@@ -40,7 +41,10 @@ export default function Home() {
               ...doc.data(),
             } as Items)
         );
-        setUsers(data);
+
+        const filteredItems = data.filter((item) => item.sold === false);
+
+        setUsers(filteredItems);
         console.log(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -60,7 +64,14 @@ export default function Home() {
           ? usersData.filter((item) => item.tag === selectedItem)
           : usersData;
 
+        const updated = filteredItems;
         setUsers(filteredItems);
+
+        const filteredItems2 = selectedItem
+          ? updated.filter((item) => item.sold === false)
+          : updated;
+
+        setUsers(filteredItems2);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

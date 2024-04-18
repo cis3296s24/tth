@@ -1,7 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
-import { getFirestore, collection, getDocs, DocumentData, where, query } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  DocumentData,
+  where,
+  query,
+} from "firebase/firestore";
 import { db, auth } from "@/app/firebase";
 
 interface Items {
@@ -44,19 +51,18 @@ export default function Home() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="text-center">
+    <div className="">
+      <div className="">
         <CardHoverEffectDemo projects={currentUserProjects} />
       </div>
     </div>
-
   );
 }
 
 function CardHoverEffectDemo({ projects }: Props) {
   return (
     <div>
-      <div className="max-w-5xl mx-auto px-8">
+      <div className="">
         <HoverEffect items={projects} />
       </div>
     </div>
