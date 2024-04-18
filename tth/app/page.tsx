@@ -8,7 +8,6 @@ import { getFirestore } from "firebase/firestore";
 import { collection, getDocs, DocumentData } from "firebase/firestore";
 import { db } from "./firebase";
 
-
 interface Project {
   title: string;
   description: string;
@@ -26,6 +25,7 @@ interface Items {
   tag: string;
   description: string;
   user_id: string;
+  sold: boolean;
 }
 
 interface Props {
@@ -45,13 +45,13 @@ export default function Home() {
         usersData.push({ id: doc.id, ...doc.data() });
       });
 
-      console.log(usersData);
-      setUsers(usersData);
+      const filteredItems = usersData.filter((item) => item.sold === false);
+
+      setUsers(filteredItems);
     }
 
     fetchItems();
   }, []);
-
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -113,18 +113,14 @@ function TypewriterEffectSmoothDemo() {
       <TypewriterEffectSmooth words={words} />
       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
         <Link href={"/signup"}>
-        <button className="w-40 h-10 rounded-xl bg-black text-white border dark:border-white border-transparent text-sm hover:bg-white hover:text-black">
-          Sign Up
-        </button>
-
-
+          <button className="w-40 h-10 rounded-xl bg-black text-white border dark:border-white border-transparent text-sm hover:bg-white hover:text-black">
+            Sign Up
+          </button>
         </Link>
         <Link href={"/login"}>
-        <button className="w-40 h-10 rounded-xl bg-white text-black border border-black text-sm hover:bg-black hover:text-white hover:border-white">
-          Log In
-        </button>
-
-
+          <button className="w-40 h-10 rounded-xl bg-white text-black border border-black text-sm hover:bg-black hover:text-white hover:border-white">
+            Log In
+          </button>
         </Link>
       </div>
     </div>
