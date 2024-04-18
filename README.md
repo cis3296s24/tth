@@ -14,7 +14,7 @@ git clone https://github.com/cis3296s24/tth.git
 
 2. navigate to the project directory:
 ```
-cd tth
+cd tth/tth
 ```
 3. Ensure you have Node.js installed. You can download and install it from [here](https://nodejs.org/en/download).
 
