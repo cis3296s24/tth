@@ -14,23 +14,28 @@ interface Message {
   User_from: string;
   User_to: string;
   Email_from: string;
+  item_title: string;
 }
 interface ChatItem {
   ID: string;
   Status: boolean;
   User_from: string;
   User_to: string;
+  Email_from: string,
+  Email_to: string,
   chat: Record<string, { ID: number; text: string; user_id: string }>;
 }
 export default function SettingsAccountPage() {
   const [currentUserID, setCurrentUserID] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUserID(user.uid);
+        setCurrentUserEmail(user.email);
         const messageRef = ref(Realtimedb, `Messages`);
         onValue(messageRef, (snapshot) => {
           if (snapshot.exists()) {
@@ -73,12 +78,12 @@ export default function SettingsAccountPage() {
                   "flex justify-between items-center bg-gray-300 text-black rounded-lg p-2 my-1 mr-auto"
                 }
               >
-                <span>
-                  {message.Email_from}
-                  {/* {message.User_from} */}
-                  {/* {message?.ID.substring(0, 4)}...$ */}
-                  {/* {message?.ID.substr(message?.ID.length - 4)} */}
-                </span>
+              <span>
+                  {message.user_id == currentUserID ? 
+                      <p>This is the current user: {currentUserEmail}. Post from: {message.Email_from}</p> :
+                      <p>Message from: {message.Email_from}</p>
+                  }
+              </span>
 
                 <button
                   onClick={(e) => messagehandel(message?.ID)}

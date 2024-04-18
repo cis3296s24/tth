@@ -151,6 +151,7 @@ function BackgroundGradientDemo({
 }: {
   project: Items;
   currentUser: User | null;
+  
   onTradeItem: (itemId: string) => void;
   itemId: string;
 }) {
