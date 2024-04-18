@@ -113,23 +113,14 @@ const CreateListing: React.FC = () => {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
       <br />
       <br />
       <br />
       <br />
-      <h1>Create a Post</h1>
+      <h1 style={{ fontSize: '2em' }}>Create a Post</h1>
       {/* show the error msg */}
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <input
-        type="file"
-        onChange={(event) => {
-          if (event.target.files) {
-            setImageUpload(event.target.files[0]);
-          }
-        }}
-        style={{ marginBottom: "10px" }}
-      />
       <br />
       <input
         type="text"
@@ -179,6 +170,16 @@ const CreateListing: React.FC = () => {
         <option value="Clothes">Clothes</option>
         {/* Add more options as needed */}
       </select>
+      <br />
+      <input
+        type="file"
+        onChange={(event) => {
+          if (event.target.files) {
+            setImageUpload(event.target.files[0]);
+          }
+        }}
+        style={{ marginLeft: "-260px", marginTop: "10px", marginBottom: "10px" }}
+      />
       <br />
       <button
         type="button"
