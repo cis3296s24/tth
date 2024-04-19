@@ -168,14 +168,14 @@ const Message: React.FC = ({ params }: any) => {
               >
                 Send
               </button>{" "}
-              <Link href={"/feed"}>
+              <Link href={"/profile/sold"}>
                 <button
                   onClick={handleConfirm}
                   className="bg-red-500 text-white font-semibold py-2 px-4 rounded-full"
                 >
                   Confirm
                 </button>
-                </Link>
+              </Link>
             </div>
           ) : (
             <div>
