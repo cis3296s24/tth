@@ -167,7 +167,7 @@ function BackgroundGradientDemo({
           project.link.includes(".webm") ||
           project.link.includes(".ogg") ||
           project.link.includes(".mov") ? (
-            <video width="300" height="300" controls autoPlay muted loop>
+            <video className="object-scale-down h-64 w-96c" controls autoPlay muted loop>
               <source src={project.link} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
@@ -177,7 +177,7 @@ function BackgroundGradientDemo({
               alt="NOT FOUND"
               height="300"
               width="300"
-              className="object-cover"
+              className="object-scale-down h-64 w-96"
             />
           )}
         </div>
