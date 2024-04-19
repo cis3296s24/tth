@@ -5,6 +5,7 @@ import { getDatabase, onValue, ref, update } from "firebase/database";
 import { auth, Realtimedb, db } from "@/app/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   collection,
   getDocs,
@@ -167,12 +168,14 @@ const Message: React.FC = ({ params }: any) => {
               >
                 Send
               </button>{" "}
-              <button
-                onClick={handleConfirm}
-                className="bg-red-500 text-white font-semibold py-2 px-4 rounded-full"
-              >
-                Confirm
-              </button>
+              <Link href={"/feed"}>
+                <button
+                  onClick={handleConfirm}
+                  className="bg-red-500 text-white font-semibold py-2 px-4 rounded-full"
+                >
+                  Confirm
+                </button>
+                </Link>
             </div>
           ) : (
             <div>
