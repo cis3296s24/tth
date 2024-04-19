@@ -8,6 +8,7 @@ module.exports = {
       "firebasestorage.googleapis.com",
       "media.licdn.com",
       "cdn.pixabay.com",
+      "cdn.discordapp.com",
     ],
   },
 };

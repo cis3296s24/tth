@@ -72,14 +72,14 @@ const people = [
     name: "Fariha Jahin",
     designation: "",
     image:
-      "https://media.licdn.com/dms/image/D4D03AQEhQFXtS_nToA/profile-displayphoto-shrink_800_800/0/1704762749099?e=1718841600&v=beta&t=SfjFnOYs5N0paHrVtLFZknhWa9fiqmLu1NtqTkykZZY",
+      "https://cdn.discordapp.com/attachments/1222716502462038060/1230547912615002112/IMG_1266.jpg?ex=6633b80c&is=6621430c&hm=6595532b1948e24d71c3723d673bb23bde573e4824375f18df414048bc4ec220&",
   },
   {
     id: 2,
     name: "Timothy Khumpan",
     designation: "",
     image:
-      "https://media.licdn.com/dms/image/D5603AQGbxja6F1WDhg/profile-displayphoto-shrink_400_400/0/1665499408876?e=1718236800&v=beta&t=EKw8fFiXYtpMEhqKsAGOFBI113FklJI3w3d_WkIKzG4",
+      "https://cdn.discordapp.com/attachments/1203874110753738772/1230879201343701084/IMG_1460.JPG?ex=6634ec96&is=66227796&hm=e228f36344155f406dbd728fc8ec1c0b8945b6c5b5a9e4db6c840d3c67330d8f&",
   },
   {
     id: 3,
@@ -92,7 +92,7 @@ const people = [
     name: "Bryan Li",
     designation: "",
     image:
-      "https://media.licdn.com/dms/image/D4E03AQFLv54xOgjLuw/profile-displayphoto-shrink_400_400/0/1675457099898?e=1718236800&v=beta&t=Ve0RFVKOOa4Sg_6T7MGPCI_5RDufj0GdxMshRGMDjwM",
+      "https://cdn.discordapp.com/attachments/1222716502462038060/1230526319624851527/CFCB2C0D-9F41-41DD-971B-B9E71FE5F40E.jpg?ex=6633a3f0&is=66212ef0&hm=43854d5701ee68aabe814b2762802ef1d6c46c96b5c8146b9043946e35f113e1&",
   },
 ];
 
