@@ -53,7 +53,7 @@ function MessageButton({
               {
                 ID: 1,
                 user_id: currentUserID,
-                text: `Hello I want to buy your Item: ${projectID.id}`,
+                text: `Hello I want to buy your Item: ${projectID.title}`,
               },
             ],
           });
