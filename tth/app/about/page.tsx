@@ -8,7 +8,7 @@ const AboutPage = () => {
       <br></br>
       <br></br>
       <br></br>
-      <h1 className="text-3xl font-bold mb-8">Temple Trading Hub (TTH)</h1>
+      <h1 className="text-4xl font-bold text-center mb-8">Welcome to Temple Trading Hub (TTH)</h1>
       <p className="text-lg text-white-700 mb-8">
         Temple Trading Hub (TTH) is a specialized web application tailored
         specifically for the Temple University community, offering a secure and
