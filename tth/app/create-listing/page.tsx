@@ -174,6 +174,7 @@ const CreateListing: React.FC = () => {
         <option value="Games">Games</option>
         <option value="Assignments">Assignments</option>
         <option value="Food">Food</option>
+        <option value="Others">Others</option>
 
         {/* Add more options as needed */}
       </select>
