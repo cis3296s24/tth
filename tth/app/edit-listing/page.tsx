@@ -78,6 +78,11 @@ const EditListing: React.FC = () => {
     return () => unsubscribe();
   }, []);
 
+  // show previous tag
+  useEffect(() => {
+    setSelectedTag(tag);
+  }, [tag]); 
+
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
@@ -87,7 +92,7 @@ const EditListing: React.FC = () => {
   ) => {
     setDescription(event.target.value);
   };
-  
+
   const handleTagChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTag(event.target.value); // Update the tag state with the selected value
     setSelectedTag(event.target.value); // Optionally, you can update the selectedTag state as well if needed
