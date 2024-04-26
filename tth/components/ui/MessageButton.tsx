@@ -17,6 +17,7 @@ function MessageButton({
   projectID,
   currentUserID,
   currentUserEmail,
+  
 }: {
   projectID: Items;
   currentUserID: string;
@@ -48,12 +49,13 @@ function MessageButton({
             Email_from: currentUserEmail,
             Email_to: projectID.email,
             itemId: projectID.id,
+            itemTitle: projectID.title,
             chat: [
               // Add your message at the top of the chat array
               {
                 ID: 1,
                 user_id: currentUserID,
-                text: `Hello I want to buy your Item: ${projectID.id}`,
+                text: `Hello I want to buy your Item: ${projectID.title}`,
               },
             ],
           });

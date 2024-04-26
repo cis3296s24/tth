@@ -30,7 +30,7 @@ interface Message {
   User_to: string;
   Email_from: string;
   Email_to: string;
-  item_title: string;
+  itemTitle: string;
   itemId: string;
 }
 interface ChatItem {
@@ -40,6 +40,7 @@ interface ChatItem {
   User_to: string;
   Email_from: string;
   Email_to: string;
+  itemTitle: string;
   chat: Record<string, { ID: number; text: string; user_id: string }>;
 }
 export default function SettingsAccountPage() {
@@ -98,12 +99,12 @@ export default function SettingsAccountPage() {
               >
                 {currentUserEmail == message.Email_to ? (
                   <p>
-                    {message.Email_from} Item: {message.itemId}
+                    {message.Email_from} Item: {message.itemTitle}
                   </p>
                 ) : (
                   <p>
                     {" "}
-                    {message.Email_to} Item: {message.itemId}
+                    {message.Email_to} Item: {message.itemTitle}
                   </p>
                 )}
                 <span>
