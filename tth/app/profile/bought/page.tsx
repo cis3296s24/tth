@@ -11,6 +11,9 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "@/app/firebase";
 
+/**
+ * Represents an item in the profile bought page.
+ */
 interface Items {
   id: string;
   title: string;
@@ -21,10 +24,17 @@ interface Items {
   buyer: string; // Assuming there's a field named "buyer"
 }
 
+/**
+ * Represents the props for the ProfileBoughtPage component.
+ */
 interface Props {
   projects: Items[];
 }
 
+/**
+ * Represents the profile bought page.
+ * @returns JSX.Element representing the profile bought page.
+ */
 export default function Home() {
   const [currentUserProjects, setCurrentUserProjects] = useState<Items[]>([]);
 
@@ -36,6 +46,9 @@ export default function Home() {
     }
   }, []);
 
+  /**
+   * fetch user items
+   */
   async function fetchCurrentUserProjects(userId: string) {
     try {
       const q = query(collection(db, "Item"), where("buyer", "==", userId)); // Modify query to check the "buyer" field
@@ -59,6 +72,10 @@ export default function Home() {
   );
 }
 
+/**
+ * Represents the cards ui.
+ * @returns JSX.Element representing the item cards.
+ */
 function CardHoverEffectDemo({ projects }: Props) {
   return (
     <div>

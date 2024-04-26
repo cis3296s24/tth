@@ -2,12 +2,22 @@
 import { Separator } from "@/components/ui/separator";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import router from "next/navigation";
 
+/**
+ * Represents the Settings Account Page.
+ * @returns JSX.Element representing the Settings Account Page.
+ */
 export default function SettingsAccountPage() {
+  /**
+   * Router instance to manage navigation.
+   */
   const router = useRouter();
 
+  /**
+   * Handles the logout process.
+   */
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -25,7 +35,7 @@ export default function SettingsAccountPage() {
       </div>
       <Separator />
       <div>
-        <button 
+        <button
           className="w-40 h-10 rounded-xl bg-black border dark:border-white border-transparent 
           text-white text-sm transition duration-300 ease-in-out hover:bg-white hover:text-black"
           onClick={handleLogout} // Call handleLogout function when the button is clicked
@@ -36,6 +46,3 @@ export default function SettingsAccountPage() {
     </div>
   );
 }
-
-
-

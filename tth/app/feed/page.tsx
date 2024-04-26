@@ -20,8 +20,22 @@ interface Props {
   projects: Items[];
 }
 
-const items = ["Electronics", "Books", "Clothes", "Animals", "Accessories", "Vehicles", "Games", "Assignments", "Food"];
+const items = [
+  "Electronics",
+  "Books",
+  "Clothes",
+  "Animals",
+  "Accessories",
+  "Vehicles",
+  "Games",
+  "Assignments",
+  "Food",
+];
 
+/**
+ * Represents the Feed component.
+ * @returns JSX.Element representing the Feed component.
+ */
 export default function Home() {
   const [projects, setProjects] = useState<Items[]>([]);
   const [selectedItem, setSelectedItem] = useState<string | null>("Default");
@@ -29,6 +43,9 @@ export default function Home() {
   const [users, setUsers] = useState<Items[]>([]);
 
   useEffect(() => {
+    /**
+     * Handles sorted fetching
+     */
     async function fetchItems() {
       try {
         // Query Firestore collection "Item" and order by createdAt in descending order
@@ -51,6 +68,9 @@ export default function Home() {
       }
     }
 
+    /**
+     * Handles specific fetching
+     */
     async function fetchData() {
       try {
         const querySnapshot = await getDocs(collection(db, "Item"));
@@ -83,6 +103,10 @@ export default function Home() {
     }
   }, [selectedItem]);
 
+  /**
+   * Handles the change in the selected item.
+   * @param {string} value - The selected item value.
+   */
   const handleSelectChange = (value: string) => {
     setSelectedItem(value === selectedItem ? null : value); // Toggle selection if the same item is clicked again
   };
@@ -115,7 +139,11 @@ export default function Home() {
     </div>
   );
 }
-
+/**
+ * Represents the component for displaying card hover effect.
+ * @param projects The list of projects to display.
+ * @returns JSX.Element representing the CardHoverEffectDemo component.
+ */
 function CardHoverEffectDemo({ projects }: Props) {
   return (
     <div>

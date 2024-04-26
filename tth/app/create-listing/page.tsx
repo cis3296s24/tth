@@ -12,7 +12,10 @@ import { auth } from "../../app/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
-
+/**
+ * create-listing component for creating a listing.
+ * @returns JSX.Element representing the create-listing component.
+ */
 const CreateListing: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [imageUpload, setImageUpload] = useState<File | null>(null);
@@ -65,11 +68,10 @@ const CreateListing: React.FC = () => {
       return;
     }
 
-  const imageRef: StorageReference = ref(
-    storage,
-    `images/${imageUpload.name + uuidv4()}`
-  );
-  
+    const imageRef: StorageReference = ref(
+      storage,
+      `images/${imageUpload.name + uuidv4()}`
+    );
 
     try {
       // Upload image to storage
@@ -101,7 +103,7 @@ const CreateListing: React.FC = () => {
       setDescription("");
       setSelectedTag("");
       setError("");
-      setEmail("")
+      setEmail("");
 
       setTimeout(function () {
         window.location.href = "/" + docRef.id;
@@ -113,12 +115,15 @@ const CreateListing: React.FC = () => {
   };
 
   return (
-    <div className="App" style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
+    <div
+      className="App"
+      style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}
+    >
       <br />
       <br />
       <br />
       <br />
-      <h1 style={{ fontSize: '2em' }}>Create a Post</h1>
+      <h1 style={{ fontSize: "2em" }}>Create a Post</h1>
       {/* show the error msg */}
       {error && <p style={{ color: "red" }}>{error}</p>}
       <br />
@@ -185,7 +190,11 @@ const CreateListing: React.FC = () => {
             setImageUpload(event.target.files[0]);
           }
         }}
-        style={{ marginLeft: "-260px", marginTop: "10px", marginBottom: "10px" }}
+        style={{
+          marginLeft: "-260px",
+          marginTop: "10px",
+          marginBottom: "10px",
+        }}
       />
       <br />
       <button

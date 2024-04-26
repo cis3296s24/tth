@@ -21,11 +21,18 @@ import {
   arrayUnion,
 } from "firebase/firestore";
 
+/**
+ * Represents the data structure of a message.
+ */
 interface Message {
   user_id: User | null;
   text: string;
   ID: string;
 }
+/**
+ * Represents the Message component.
+ * @returns JSX.Element representing the Messaging component.
+ */
 const Message: React.FC = ({ params }: any) => {
   const [currentUserID, setCurrentUserID] = useState<string | null>(null);
 
@@ -38,6 +45,9 @@ const Message: React.FC = ({ params }: any) => {
   const router = useRouter();
   const msgitemId = params.id;
 
+  /**
+   * Handles the confirmation of a transaction.
+   */
   async function handleConfirm() {
     try {
       if (!itemID || !chatOtherID) {
@@ -115,6 +125,9 @@ const Message: React.FC = ({ params }: any) => {
     return () => unsubscribe();
   }, [router, setCurrentUserID, msgitemId]);
 
+  /**
+   * Handles sending a message.
+   */
   const handleSendMessage = async () => {
     if (inputText.trim() !== "") {
       const chatID = Date.now();

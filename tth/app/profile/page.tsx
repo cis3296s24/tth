@@ -5,13 +5,18 @@ import { auth } from "../../app/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
+/**
+ * Represents the Profile component.
+ */
 function Profile() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [userID, setUserID] = useState("");
   const [avater, setAvater] = useState("");
 
-  /////UseEffect
+  /**
+   * Retrieves user information on authentication state change.
+   */
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -28,7 +33,7 @@ function Profile() {
         // ...
       }
     });
-  },[]);
+  }, []);
 
   return (
     <div className="profiles">
@@ -44,7 +49,9 @@ function Profile() {
 }
 
 import { Separator } from "@/components/ui/separator";
-
+/**
+ * Represents the SettingsProfilePage component.
+ */
 export default function SettingsProfilePage() {
   return (
     <div className="space-y-6">

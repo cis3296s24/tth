@@ -5,12 +5,18 @@ import { auth } from "../../app/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
+/**
+ * Represents the Login component.
+ * @returns JSX.Element representing the Login page.
+ */
 export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [passWord, setPassWord] = useState("");
 
-  //UseEffect
+  /**
+   * Handles the authentication state change.
+   */
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -25,7 +31,9 @@ export default function Login() {
     });
   }, []);
 
-  // SingUp Progress
+  /**
+   * Handles the login process.
+   */
   const signupHandel = () => {
     if (email && passWord) {
       signInWithEmailAndPassword(auth, email, passWord)

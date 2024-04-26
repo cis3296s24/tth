@@ -23,6 +23,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { BackgroundGradient } from "../../components/ui/background-gradient";
 import Image from "next/image";
 
+/**
+ * EditListing component for editing a listing.
+ * @returns JSX.Element representing the EditListing component.
+ */
 const EditListing: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);

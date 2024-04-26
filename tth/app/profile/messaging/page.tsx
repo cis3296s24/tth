@@ -42,6 +42,10 @@ interface ChatItem {
   Email_to: string;
   chat: Record<string, { ID: number; text: string; user_id: string }>;
 }
+/**
+ * Represents the Messaging page.
+ * @returns JSX.Element representing the Messaging page.
+ */
 export default function SettingsAccountPage() {
   const [currentUserID, setCurrentUserID] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -75,6 +79,11 @@ export default function SettingsAccountPage() {
     return () => unsubscribe();
   }, [auth, setCurrentUserID]);
 
+  /**
+   * Handles the click event for opening a chat.
+   * @param id The ID of the chat.
+   * @param id2 The ID of the item related to the chat.
+   */
   const messagehandel = (id: string, id2: string) => {
     router.push(`/message/${id}${id2}`);
   };

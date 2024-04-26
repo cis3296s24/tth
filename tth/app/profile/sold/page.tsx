@@ -11,6 +11,9 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "@/app/firebase";
 
+/**
+ * Represents the data structure of an item.
+ */
 interface Items {
   id: string;
   title: string;
@@ -25,6 +28,10 @@ interface Props {
   projects: Items[];
 }
 
+/**
+ * Represents the Sold page.
+ * @returns JSX.Element representing the Sold page.
+ */
 export default function Home() {
   const [currentUserProjects, setCurrentUserProjects] = useState<Items[]>([]);
 
@@ -36,6 +43,10 @@ export default function Home() {
     }
   }, []);
 
+  /**
+   * Fetches the projects created by the current user.
+   * @param userId The ID of the current user.
+   */
   async function fetchCurrentUserProjects(userId: string) {
     try {
       const q = query(
@@ -62,7 +73,11 @@ export default function Home() {
     </div>
   );
 }
-
+/**
+ * Represents the component for displaying card hover effect.
+ * @param projects The list of projects to display.
+ * @returns JSX.Element representing the CardHoverEffectDemo component.
+ */
 function CardHoverEffectDemo({ projects }: Props) {
   return (
     <div>

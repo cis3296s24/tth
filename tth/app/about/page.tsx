@@ -1,7 +1,10 @@
 "use client";
 import React from "react";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
-
+/**
+ * Represents the About page.
+ * @returns JSX.Element representing the About page.
+ */
 const AboutPage = () => {
   return (
     <div className="max-w-4xl mx-auto p-8">
@@ -66,6 +69,9 @@ const AboutPage = () => {
 
 export default AboutPage;
 
+/**
+ * Represents a pfp in the component.
+ */
 const people = [
   {
     id: 1,
@@ -95,7 +101,10 @@ const people = [
       "https://cdn.discordapp.com/attachments/1222716502462038060/1230526319624851527/CFCB2C0D-9F41-41DD-971B-B9E71FE5F40E.jpg?ex=6633a3f0&is=66212ef0&hm=43854d5701ee68aabe814b2762802ef1d6c46c96b5c8146b9043946e35f113e1&",
   },
 ];
-
+/**
+ * Represents the component for displaying pictures.
+ * @returns JSX.Element representing the profile picture component.
+ */
 function AnimatedTooltipPreview() {
   return (
     <div className="flex flex-row items-center justify-center mb-10 w-full">
