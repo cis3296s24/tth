@@ -1,5 +1,8 @@
 import React from "react";
-
+/**
+ * Represents the Help page.
+ * @returns JSX.Element representing the Help page.
+ */
 const Help = () => {
   return (
     <div

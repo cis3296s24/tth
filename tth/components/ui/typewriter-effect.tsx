@@ -3,7 +3,9 @@
 import { cn } from "../../utils/cn";
 import { motion, stagger, useAnimate, useInView } from "framer-motion";
 import { useEffect } from "react";
-
+/**
+ * TypewriterEffect component for creating typewriter animation.
+ */
 export const TypewriterEffect = ({
   words,
   className,
@@ -23,6 +25,7 @@ export const TypewriterEffect = ({
       text: word.text.split(""),
     };
   });
+  // The purpose of the class: Renders a typewriter effect with animation.
 
   const [scope, animate] = useAnimate();
   const isInView = useInView(scope);
@@ -44,7 +47,12 @@ export const TypewriterEffect = ({
     }
   }, [isInView]);
 
+  /**
+   * Render the words with typewriter animation.
+   * @returns JSX.Element representing the typewriter animation.
+   */
   const renderWords = () => {
+    // The purpose of the method: Render the words with typewriter animation.
     return (
       <motion.div ref={scope} className="inline">
         {wordsArray.map((word, idx) => {
@@ -70,6 +78,7 @@ export const TypewriterEffect = ({
     );
   };
   return (
+    // Return value and output variables: JSX.Element representing the typewriter effect.
     <div
       className={cn(
         "text-base sm:text-xl md:text-3xl lg:text-5xl font-bold text-center",
@@ -97,7 +106,9 @@ export const TypewriterEffect = ({
     </div>
   );
 };
-
+/**
+ * TypewriterEffectSmooth component for creating smooth typewriter animation.
+ */
 export const TypewriterEffectSmooth = ({
   words,
   className,
@@ -117,7 +128,13 @@ export const TypewriterEffectSmooth = ({
       text: word.text.split(""),
     };
   });
+  // The purpose of the class: Renders a smooth typewriter effect with animation.
+  /**
+   * Render the words with smooth typewriter animation.
+   * @returns JSX.Element representing the smooth typewriter animation.
+   */
   const renderWords = () => {
+    // The purpose of the method: Render the words with smooth typewriter animation.
     return (
       <div>
         {wordsArray.map((word, idx) => {
@@ -140,6 +157,7 @@ export const TypewriterEffectSmooth = ({
   };
 
   return (
+    // Return value and output variables: JSX.Element representing the smooth typewriter effect.
     <div className={cn("flex space-x-1 my-6", className)}>
       <motion.div
         className="overflow-hidden pb-2"

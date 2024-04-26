@@ -1,5 +1,9 @@
 import { Separator } from "@/components/ui/separator";
 
+/**
+ * Settings account page component.
+ * @returns JSX.Element representing the settings account page.
+ */
 export default function SettingsAccountPage() {
   return (
     <div className="space-y-6">

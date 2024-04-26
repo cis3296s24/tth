@@ -8,13 +8,35 @@ import {
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
+/**
+ * Signup component for user registration.
+ * @returns JSX.Element representing the Signup page.
+ */
 function Signup() {
+  // Data fields
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [passWord, setPassWord] = useState("");
-  const [userName, setUsername] = useState("");
 
-  ///UseEffect
+  /**
+   * Stores the user's email.
+   * @type {string}
+   */
+  const [email, setEmail] = useState(""); // Stores the user's email
+
+  /**
+   * Stores the user's password.
+   * @type {string}
+   */
+  const [passWord, setPassWord] = useState(""); // Stores the user's password
+
+  /**
+   * Stores the user's name.
+   * @type {string}
+   */
+  const [userName, setUsername] = useState(""); // Stores the user's name
+
+  /**
+   * useEffect hook to check authentication state.
+   */
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -29,7 +51,9 @@ function Signup() {
     });
   }, []);
 
-  // SingUp Progress
+  /**
+   * Handles user signup.
+   */
   const signupHandel = () => {
     if (email && passWord && userName) {
       createUserWithEmailAndPassword(auth, email, passWord)

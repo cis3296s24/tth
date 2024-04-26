@@ -4,11 +4,17 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { SidebarNav } from "@/components/ui/sidebar-nav";
 
+/**
+ * Represents the metadata for the Profile Layout.
+ */
 export const metadata: Metadata = {
   title: "Forms",
   description: "Advanced form example using react-hook-form and Zod.",
 };
 
+/**
+ * Represents an item in the sidebar navigation.
+ */
 const sidebarNavItems = [
   {
     title: "Profile",
@@ -50,10 +56,21 @@ const sidebarNavItems = [
   // },
 ];
 
+/**
+ * Represents the props for the Profile Layout component.
+ */
 interface SettingsLayoutProps {
+  /**
+   * The children components to render within the layout.
+   */
   children: React.ReactNode;
 }
 
+/**
+ * Represents the Profile Layout.
+ * @param children The children components to render within the layout.
+ * @returns JSX.Element representing the Profile Layout.
+ */
 export default function SettingsLayout({ children }: SettingsLayoutProps) {
   return (
     <>
