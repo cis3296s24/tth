@@ -27,10 +27,13 @@ const EditListing: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [title, setTitle] = useState<string>("");
+  const [tag, setTag] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [sucessUpdate, setSucessUpdate] = useState(false);
   const [lodingthumbnail, setLodingThumbnail] = useState(false);
+  const [selectedTag, setSelectedTag] = useState<string>("");
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const postid = searchParams.get("postid");
@@ -49,6 +52,7 @@ const EditListing: React.FC = () => {
                 setImageUrl(itemData.link);
                 setTitle(itemData.title);
                 setDescription(itemData.description);
+                setTag(itemData.tag);
               } else {
                 router.push("/feed");
               }
@@ -74,6 +78,11 @@ const EditListing: React.FC = () => {
     return () => unsubscribe();
   }, []);
 
+  // show previous tag
+  useEffect(() => {
+    setSelectedTag(tag);
+  }, [tag]); 
+
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
@@ -83,6 +92,13 @@ const EditListing: React.FC = () => {
   ) => {
     setDescription(event.target.value);
   };
+
+  const handleTagChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setTag(event.target.value); // Update the tag state with the selected value
+    setSelectedTag(event.target.value); // Optionally, you can update the selectedTag state as well if needed
+  };
+  
+  
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!currentUser || !title || !description) {
@@ -134,8 +150,11 @@ const EditListing: React.FC = () => {
           title: title,
           description: description,
           link: imageUrl,
+          tag: tag,
           user_id: currentUser.uid,
           createdAt: new Date(),
+    
+        
         })
           .then(() => {
             setSucessUpdate(true);
@@ -215,6 +234,29 @@ const EditListing: React.FC = () => {
               />
             </div>
             <br></br>
+
+            <div className="flex justify-center items-center text-sm text-neutral-600 dark:text-neutral-400">
+              <select
+                value={selectedTag}
+                onChange={handleTagChange}
+                className="w-full px-3 py-2 mt-2 rounded border"
+              >
+                <option value="">Select Tag</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Books">Books</option>
+                <option value="Clothes">Clothes</option>
+                <option value="Animals">Animals</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Vehicles">Vehicles</option>
+                <option value="Games">Games</option>
+                <option value="Assignments">Assignments</option>
+                <option value="Food">Food</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+                {/* Add more options as needed */}
+              </select>
+            </div>
+            <br></br>
+
             <div className="flex justify-center items-center text-sm text-neutral-600 dark:text-neutral-400">
               <button
                 onClick={updatetemes}
